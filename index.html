@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-PT" class="scroll-smooth">
+  <head>
+    <script>
+      (function() {
+        // Intercept uncaught TypeError on window.fetch setter in sandboxed iframes
+        window.addEventListener('error', function(event) {
+          if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('getter') !== -1) {
+            event.preventDefault();
+            if (typeof event.stopImmediatePropagation === 'function') {
+              event.stopImmediatePropagation();
+            }
+            return true;
+          }
+        }, true);
+
+        try {
+          var _currentFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _currentFetch;
+            },
+            set: function(newFetch) {
+              _currentFetch = newFetch;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (err) {
+          try {
+            var proto = Object.getPrototypeOf(window);
+            var _protoFetch = window.fetch;
+            Object.defineProperty(proto, 'fetch', {
+              get: function() {
+                return _protoFetch;
+              },
+              set: function(newFetch) {
+                _protoFetch = newFetch;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (err2) {}
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>300+ Cards de Estudo Clínico</title>
+    <meta name="description" content="Página oficial dos 300+ Cards Ilustrados de Estudo para estudantes e profissionais de saúde." />
+    <meta property="og:title" content="300+ Cards de Estudo Clínico" />
+    <meta property="og:description" content="Página oficial dos 300+ Cards Ilustrados de Estudo para estudantes e profissionais de saúde." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-teal-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

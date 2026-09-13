@@ -1,0 +1,6 @@
+{
+  "name": "300+ Cards de Estudo Clínico",
+  "description": "Página oficial dos 300+ Cards Ilustrados de Estudo para estudantes e profissionais de saúde.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
